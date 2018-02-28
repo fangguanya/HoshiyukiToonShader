@@ -29,7 +29,7 @@ Shader "HoshiyukiToon/Outline"
 				#pragma fragment frag
 				//#pragma multi_compile_fwdbase
 				#pragma multi_compile_fog	// make fog work
-				#include "HoshiyukiToonCommon.cginc"
+				#include "HoshiyukiToonOutline.cginc"
 
 
 				/* --- Uniforms --- */
@@ -51,10 +51,10 @@ Shader "HoshiyukiToon/Outline"
 					 */
 					struct v2f
 					{
-						UNITY_FOG_COORDS(1)
-						float4	vertex		: SV_POSITION;
-						half4	color		: COLOR;
-						float4	worldPos	: TEXCOORD0;
+						UNITY_FOG_COORDS(2)
+						float4	vertex				: SV_POSITION;
+						half4	ambientOrLightmap	: TEXCOORD0;
+						float4	worldPos			: TEXCOORD1;
 					};
 				/* end */
 
@@ -64,33 +64,12 @@ Shader "HoshiyukiToon/Outline"
 					 */
 					v2f vert (appdata v)
 					{
-						float edge = _OutlineSize;
 						v2f o;
-						o.vertex = UnityObjectToClipPos(v.vertex);
-
-						float3	norm		= normalize( mul( (float3x3)UNITY_MATRIX_IT_MV, float4(v.normal,0) ) );
-						float2	offset		= TransformViewToProjection( norm.xy );
-						float	fov			= atan( 1 / unity_CameraProjection._m11 ) * 2;
-
-						// Outline translation
-						#ifdef UNITY_Z_0_FAR_FROM_CLIPSPACE
-							o.vertex.xy += offset * fov * UNITY_Z_0_FAR_FROM_CLIPSPACE( o.vertex.z ) * edge;
-						#else
-							o.vertex.xy += offset * edge * fov * (o.vertex.z);
-						#endif
-
-						// GI Calclation
-						o.color		= _OutlineColor;
-						#ifdef UNITY_LIGHT_PROBE_PROXY_VOLUME
-							// Sample Light probe GI
-							if (unity_ProbeVolumeParams.x != 1)
-							{
-								o.color.rgb *= ShadeSHSimpleToon();
-							}
-							o.worldPos = mul( unity_ObjectToWorld, v.vertex );
-						#else
-							o.color.rgb *= ShadeSHSimpleToon();
-						#endif
+						
+						HTSOutlineVertData d = HTS_OutlineVertexProcess(v.vertex, v.normal, _OutlineSize);
+						o.vertex			= d.vertex;
+						o.worldPos			= d.worldPos;
+						o.ambientOrLightmap	= d.ambientOrLightmap;
 
 						UNITY_TRANSFER_FOG(o,o.vertex);
 						return o;
@@ -102,16 +81,10 @@ Shader "HoshiyukiToon/Outline"
 					fixed4 frag (v2f i) : SV_Target
 					{
 						// sample the texture
-						half4 col = i.color;
+						half4 col = _OutlineColor;
 
-						// Sample Proxy Volume GI
-						#if defined(UNITY_LIGHT_PROBE_PROXY_VOLUME)
-							if (unity_ProbeVolumeParams.x == 1)
-							{
-								col.rgb *= SHEvalLinearL0L1_SampleProbeVolume_Toon( i.worldPos );
-							}
-						#endif
-
+						HTSOutlineFragData d = HTS_OutlineFragmentProcess(i.worldPos, i.ambientOrLightmap);
+						col.rgb *= d.ambient;
 
 						// apply fog
 						UNITY_APPLY_FOG(i.fogCoord, col);

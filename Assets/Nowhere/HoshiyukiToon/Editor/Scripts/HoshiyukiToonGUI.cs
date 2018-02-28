@@ -6,13 +6,13 @@ using UnityEngine;
 using UnityEditor;
 
 
-namespace NowhereUnityEditor.Rendering{
+namespace NowhereUnityEditor.HoshiyukiToon{
 
 	///<summary>シェーダーのカスタムエディタ</summary>
 	///<remarks>
 	///
 	///</remarks>
-	public class HoshiyukiToonEditor : ShaderGUI{
+	public class HoshiyukiToonGUI : ShaderGUI{
 
         #region Typedefs
             enum BlendMode {
@@ -276,7 +276,7 @@ namespace NowhereUnityEditor.Rendering{
                 }
 
                 static void TryLocalize() {
-                    var obj = (TextAsset)EditorGUIUtility.Load("HoshiyukiToonEditor/Localization/HoshiyukiToonEditor_" + Application.systemLanguage.ToString() + ".json");
+                    var obj = (TextAsset)EditorGUIUtility.Load("HoshiyukiToonEditor/Localization/HoshiyukiToonGUI_" + Application.systemLanguage.ToString() + ".json");
                     if( obj )
                     {
                         EditorJsonUtility.FromJsonOverwrite(obj.text, s_styles);

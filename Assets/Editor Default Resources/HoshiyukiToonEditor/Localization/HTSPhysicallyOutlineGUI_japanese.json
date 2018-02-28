@@ -1,0 +1,98 @@
+﻿{
+  "albedoText": {
+    "m_Text": "アルベド",
+    "m_Image": { "instanceID": 0 },
+    "m_Tooltip": "反射率(RGB)と不透明度(アルファ)の設定"
+  },
+  "alphaCutoffText": {
+    "m_Text": "しきい値",
+    "m_Image": { "instanceID": 0 },
+    "m_Tooltip": ""
+  },
+  "metallicMapText": {
+    "m_Text": "メタリック",
+    "m_Image": { "instanceID": 0 },
+    "m_Tooltip": ""
+  },
+  "smoothnessText": {
+    "m_Text": "スムーズネス",
+    "m_Image": { "instanceID": 0 },
+    "m_Tooltip": ""
+  },
+  "smoothnessScaleText": {
+    "m_Text": "スムーズネス",
+    "m_Image": { "instanceID": 0 },
+    "m_Tooltip": ""
+  },
+  "smoothnessMapChannelText": {
+    "m_Text": "ソース",
+    "m_Image": { "instanceID": 0 },
+    "m_Tooltip": ""
+  },
+  "highlightsText": {
+    "m_Text": "スペキュラーハイライト",
+    "m_Image": { "instanceID": 0 },
+    "m_Tooltip": "スペキュラーハイライト"
+  },
+  "reflectionsText": {
+    "m_Text": "反射",
+    "m_Image": { "instanceID": 0 },
+    "m_Tooltip": "鏡面反射"
+  },
+  "normalMapText": {
+    "m_Text": "法線マップ",
+    "m_Image": { "instanceID": 0 },
+    "m_Tooltip": "法線マップ"
+  },
+  "heightMapText": {
+    "m_Text": "ハイトマップ",
+    "m_Image": { "instanceID": 0 },
+    "m_Tooltip": "ハイトマップ(G)"
+  },
+    "occlusionText": {
+    "m_Text": "オクルージョン",
+    "m_Image": { "instanceID": 0 },
+    "m_Tooltip": "遮蔽マップ(G)の設定"
+  },
+  "emissionText": {
+    "m_Text": "発光",
+    "m_Image": { "instanceID": 0 },
+    "m_Tooltip": "発光(RGB)"
+  },
+  "detailMaskText": {
+    "m_Text": "細部マスク",
+    "m_Image": { "instanceID": 0 },
+    "m_Tooltip": "Secondary Mapsのマスク(A)"
+  },
+  "detailAlbedoText": {
+    "m_Text": "細部アルベド x2",
+    "m_Image": { "instanceID": 0 },
+    "m_Tooltip": "アルベド(RGB)の2倍の値"
+  },
+  "detailNormalMapText": {
+    "m_Text": "法線マップ",
+    "m_Image": { "instanceID": 0 },
+    "m_Tooltip": "法線マップ"
+  },
+  "lineSizeText": {
+    "m_Text": "サイズ",
+    "m_Image": { "instanceID": 0 },
+    "m_Tooltip": "アウトラインの太さ(ビューポート空間)"
+  },
+  "lineColorText": {
+    "m_Text": "色",
+    "m_Image": { "instanceID": 0 },
+    "m_Tooltip": "色(RGB)と不透明度(アルファ)の設定"
+  },
+  "primaryMapsText": "Main Maps",
+  "secondaryMapsText": "Secondary Maps",
+  "lineSettingsText": "Outline",
+  "forwardText": "Forward Rendering Options",
+  "renderingMode": "レンダリングモード",
+  "advancedText": "Advanced Options",
+  "emissiveWarning": {
+    "m_Text": "Emissive value is animated but the material has not been configured to support emissive. Please make sure the material itself has some amount of emissive.",
+    "m_Image": { "instanceID": 0 },
+    "m_Tooltip": ""
+  }
+}
